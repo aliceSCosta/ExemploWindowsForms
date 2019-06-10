@@ -12,9 +12,29 @@ namespace RegistroDePessoas
 {
     public partial class Form1 : Form
     {
+        List<String> Nomes;
+
         public Form1()
         {
             InitializeComponent();
+            Nomes = new List<String>();
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            String nome = txtNome.Text;
+            Nomes.Add(nome);
+            exibeCadastros();
+        }
+
+        private void exibeCadastros()
+        {
+            String cadastros = "";
+            foreach (String temp in Nomes)
+            {
+                cadastros += temp + Environment.NewLine;
+            }
+            txtCadastro.Text = cadastros;
         }
     }
 }
