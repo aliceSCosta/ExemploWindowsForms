@@ -27,14 +27,30 @@ namespace RegistroDePessoas
                 Pessoa p = new Pessoa();
                 p.Nome = txtNome.Text;
                 p.Idade = Convert.ToInt32(nudIdade.Value);
+                p.Nascimento = dtpNascimento.Value;
+                p.Profissao = cmbProfissao.Text;
                 p.Telefone = Convert.ToInt64(mskTelefone.Text);
+
                 if (rdoFeminino.Checked)
+                {
                     p.Sexo = "feminino";
+                }
                 else
-                    p.Sexo = "masculino";
+                {
+                    if(rdoMasculino.Checked)
+                    {
+                        p.Sexo = "masculino";
+                    }
+                    else
+                    {
+                        p.Sexo = "outro";
+                    }
+                }
 
                 lista.Add(p);
                 ExibeRegistros();
+
+                LimpaCampos();
 
                 /*
                 p.idade = Convert.ToInt32(nudIdade.Value);
@@ -46,11 +62,25 @@ namespace RegistroDePessoas
             }
         }
 
+        private void LimpaCampos()
+        {
+            txtNome.Clear();
+            dtpNascimento.Value = DateTime.Now;
+            nudIdade.Value = nudIdade.Minimum;
+            mskTelefone.Clear();
+            cmbProfissao.Text = "";
+            rdoFeminino.Checked = true;
+
+            txtNome.Focus();
+        }
+
         private void ExibeRegistros()
         {
             dgvRegistros.DataSource = null;
             dgvRegistros.DataSource = lista;
         }
+
+        
 
         /*
         private void exibeCadastros()
